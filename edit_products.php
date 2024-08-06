@@ -79,7 +79,7 @@ select{
     justify-content: center;
 }
 .btn {
-    background-color: #616a6b;
+    background-color: black;
     cursor: pointer;
     color: var(--white-color);
     background-color;
@@ -88,10 +88,6 @@ select{
     margin-bottom:20px;
     text-align:center;
 } 
-.btn:hover{
-    background-color: #17202a;
-    color: var(--white-color);
-}
 
 @media screen and (min-width :992px ) {
     body {
@@ -103,7 +99,7 @@ select{
 }
 .container {
     border:1px solid black;
-    max-width: 600px; /* Adjust the maximum width as needed */
+    max-width: 800px; /* Adjust the maximum width as needed */
     width: 100%;
     padding:30px 50px;
     margin-top:40px;
@@ -143,7 +139,7 @@ select{
     justify-content: center;
 }
 .btn {
-    background-color: #616a6b;
+    background-color: var(--primary-color);
     cursor: pointer;
     color: var(--white-color);
     background-color;
@@ -256,7 +252,7 @@ if (isset($_POST['category_id'])) {
                 class="form-control" value="<?php echo $quantity ?>" autocomplete="off" required="required">
             </div>
             <div class="form-outline mb-4 w-50 m-auto">
-                <lable for="product_color" class="form-lable">Product Quantity</lable>
+                <lable for="product_color" class="form-lable">Product color</lable>
                 <input type="text" name="product_color" id="product_color" 
                 class="form-control" value="<?php echo $product_color ?>" autocomplete="off" required="required">
             </div>
@@ -326,16 +322,16 @@ if (isset($_POST['edit_product'])) {
         echo "<script> alter('Please fill all the filed and continue the process')</script>";
     }
     else{
-        move_uploaded_file($temp_image1,"../shop_area/product_images/$product_image1");
-        move_uploaded_file($temp_image2,"../shop_area/product_images/$product_image2");
-        move_uploaded_file($temp_image3,"../shop_area/product_images/$product_image3");
+        move_uploaded_file($temp_image1,"./product_images/$product_image1");
+        move_uploaded_file($temp_image2,"./product_images/$product_image2");
+        move_uploaded_file($temp_image3,"./product_images/$product_image3");
 
         //query update 
         $update_product="update `products` set product_title='$product_title',product_description='$product_desc', product_keywords='$product_keywords',category_id='$product_category',brand_id='$product_brand', product_image1='$product_image1', product_image2='$product_image2',product_image3='$product_image3',product_price='$product_price',date=NOW(),product_status='$product_status',product_quantity='$quantity',product_color='$product_color',product_priceO='$product_priceO' where product_id=$edit_id ";
         $result_update=mysqli_query($con,$update_product);
         if($result_update){
             echo "<script> alert('product updated successsfully')</script>";
-            echo "<script> window.open('./admin.php','_self')</script>";
+            echo "<script> window.open('./shop.php','_self')</script>";
         }
     }
 }
